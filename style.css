@@ -5,7 +5,7 @@
 }
 
 html {
-    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -14,6 +14,8 @@ body {
     color: #333;
     overflow-x: hidden;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Hero Section */
@@ -26,6 +28,7 @@ body {
     justify-content: center;
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .hero::before {
@@ -37,6 +40,7 @@ body {
     bottom: 0;
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23000" opacity="0.02"/><circle cx="75" cy="75" r="1" fill="%23000" opacity="0.02"/><circle cx="50" cy="10" r="0.5" fill="%23000" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
     z-index: 1;
+    pointer-events: none;
 }
 
 .hero-content {
@@ -48,7 +52,11 @@ body {
     align-items: center;
     position: relative;
     z-index: 2;
-    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.hero-text {
+    width: 100%;
 }
 
 .hero-text h1 {
@@ -61,26 +69,25 @@ body {
 }
 
 .newsletter-form {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.1);
     padding: 40px;
     border-radius: 15px;
-    box-shadow: transparent 0 0 0 2px rgba(244, 162, 97, 0.2), 
-                rgba(244, 162, 97, 0.2) 0 20px 40px, 
-                rgba(244, 162, 97, 0.2) 0 30px 60px;
+    box-shadow: 0 8px 32px rgba(244, 162, 97, 0.2);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.2);
+    width: 100%;
 }
 
 .form-group {
     display: flex;
     gap: 0;
     margin-top: 20px;
-    flex-wrap: wrap;
+    width: 100%;
 }
 
 .email-input {
     flex: 1;
-    min-width: 200px;
+    min-width: 0;
     padding: 15px 20px;
     border: 2px solid #ddd;
     border-right: none;
@@ -108,6 +115,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .subscribe-btn:hover {
@@ -121,28 +129,28 @@ body {
     gap: 20px;
     justify-content: center;
     align-items: center;
-    max-width: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .book-cover {
-    width: min(300px, 45%);
+    width: 280px;
     height: auto;
     aspect-ratio: 600/560;
     border-radius: 12px;
-    box-shadow: transparent 0 0 0 2px rgba(244, 162, 97, 0.2), 
-                rgba(244, 162, 97, 0.1) 0 10px 20px, 
-                rgba(244, 162, 97, 0.1) 0 15px 30px;
+    box-shadow: transparent;
     transition: all 0.4s ease;
     cursor: pointer;
     overflow: hidden;
     background: transparent;
+    flex-shrink: 0;
+    background-color: transparent;
 }
 
 .book-cover:hover {
     transform: translateY(-10px) rotate(2deg);
-    box-shadow: transparent 0 0 0 2px rgba(244, 162, 97, 0.2), 
-                rgba(244, 162, 97, 0.2) 0 20px 40px, 
-                rgba(244, 162, 97, 0.2) 0 30px 60px;
+    box-shadow: transparent;
+     background-color: transparent;
 }
 
 .book-cover:nth-child(2) {
@@ -158,6 +166,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 /* Floating animation for books */
@@ -175,12 +184,15 @@ footer {
     background: #000;
     color: #fff;
     padding: 2rem 1rem;
+    width: 100%;
     margin-top: auto;
+    position: relative;
+    z-index: 10;
 }
 
 .footer-container {
     max-width: 1200px;
-    margin: auto;
+    margin: 0 auto;
     padding: 0 20px;
 }
 
@@ -301,6 +313,8 @@ footer {
     overflow: hidden;
     z-index: 1;
     pointer-events: none;
+    top: 0;
+    left: 0;
 }
 
 .particle {
@@ -323,18 +337,22 @@ footer {
     }
 }
 
+/* Main content wrapper if you have other sections */
+main {
+    flex: 1;
+    width: 100%;
+}
+
 /* Responsive Design */
 
 /* Large Tablets and Small Desktops */
 @media (max-width: 1024px) {
     .hero {
         padding: 60px 20px;
-        min-height: 60vh;
     }
     
     .hero-content {
         gap: 40px;
-        padding: 0;
     }
     
     .newsletter-form {
@@ -342,7 +360,7 @@ footer {
     }
     
     .book-cover {
-        width: min(250px, 40%);
+        width: 240px;
     }
     
     .payment-icons img,
@@ -368,8 +386,7 @@ footer {
     .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 30px;
-        padding: 0;
+        gap: 40px;
     }
     
     .hero-text h1 {
@@ -400,7 +417,7 @@ footer {
     }
     
     .book-showcase {
-        margin-top: 30px;
+        margin-top: 20px;
         flex-direction: column;
         align-items: center;
     }
@@ -449,7 +466,6 @@ footer {
 @media (max-width: 480px) {
     .hero {
         padding: 30px 15px;
-        min-height: auto;
     }
     
     .hero-text h1 {
@@ -535,8 +551,22 @@ footer {
         letter-spacing: 0.5px;
     }
     
+    .book-cover {
+        width: min(200px, 85%);
+    }
+    
     .payment-icons img,
     .payment-icon {
         width: 30px;
         height: 20px;
         font-size: 9px;
+        padding: 2px;
+    }
+    
+    .social-icons img,
+    .social-icon {
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+    }
+}
